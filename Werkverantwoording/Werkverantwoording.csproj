@@ -166,7 +166,8 @@
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ProgressController.cs" />
+    <Compile Include="Controllers\DayController.cs" />
+    <Compile Include="Controllers\ProgressesController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\TaskContext.cs" />
@@ -177,11 +178,32 @@
     <Compile Include="Migrations\201506010757036_InitialCreate.Designer.cs">
       <DependentUpon>201506010757036_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506020749413_Added submitted row to progress.cs" />
+    <Compile Include="Migrations\201506020749413_Added submitted row to progress.Designer.cs">
+      <DependentUpon>201506020749413_Added submitted row to progress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506020852060_changed taskiD inside of progress from int to list.cs" />
+    <Compile Include="Migrations\201506020852060_changed taskiD inside of progress from int to list.Designer.cs">
+      <DependentUpon>201506020852060_changed taskiD inside of progress from int to list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506020854518_changed taskID list inside of progress to int list from string list.cs" />
+    <Compile Include="Migrations\201506020854518_changed taskID list inside of progress to int list from string list.Designer.cs">
+      <DependentUpon>201506020854518_changed taskID list inside of progress to int list from string list.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506021053400_Added new model named Day.cs" />
+    <Compile Include="Migrations\201506021053400_Added new model named Day.Designer.cs">
+      <DependentUpon>201506021053400_Added new model named Day.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506021309146_Changed ProgressID type.cs" />
+    <Compile Include="Migrations\201506021309146_Changed ProgressID type.Designer.cs">
+      <DependentUpon>201506021309146_Changed ProgressID type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Assignment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Day.cs" />
     <Compile Include="Models\Progress.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
@@ -252,11 +274,11 @@
     <Content Include="Views\Assignments\Details.cshtml" />
     <Content Include="Views\Assignments\Edit.cshtml" />
     <Content Include="Views\Assignments\Index.cshtml" />
-    <Content Include="Views\Progress\Create.cshtml" />
-    <Content Include="Views\Progress\Delete.cshtml" />
-    <Content Include="Views\Progress\Details.cshtml" />
-    <Content Include="Views\Progress\Edit.cshtml" />
-    <Content Include="Views\Progress\Index.cshtml" />
+    <Content Include="Views\Day\Create.cshtml" />
+    <Content Include="Views\Day\Delete.cshtml" />
+    <Content Include="Views\Day\Details.cshtml" />
+    <Content Include="Views\Day\Edit.cshtml" />
+    <Content Include="Views\Day\Index.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
@@ -267,6 +289,11 @@
     <Content Include="Views\Role\Details.cshtml" />
     <Content Include="Views\Role\Edit.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Progresses\Create.cshtml" />
+    <Content Include="Views\Progresses\Delete.cshtml" />
+    <Content Include="Views\Progresses\Details.cshtml" />
+    <Content Include="Views\Progresses\Edit.cshtml" />
+    <Content Include="Views\Progresses\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,6 +308,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506010757036_InitialCreate.resx">
       <DependentUpon>201506010757036_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506020749413_Added submitted row to progress.resx">
+      <DependentUpon>201506020749413_Added submitted row to progress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506020852060_changed taskiD inside of progress from int to list.resx">
+      <DependentUpon>201506020852060_changed taskiD inside of progress from int to list.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506020854518_changed taskID list inside of progress to int list from string list.resx">
+      <DependentUpon>201506020854518_changed taskID list inside of progress to int list from string list.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021053400_Added new model named Day.resx">
+      <DependentUpon>201506021053400_Added new model named Day.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506021309146_Changed ProgressID type.resx">
+      <DependentUpon>201506021309146_Changed ProgressID type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

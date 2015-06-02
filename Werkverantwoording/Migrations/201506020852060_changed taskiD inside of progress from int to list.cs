@@ -1,0 +1,18 @@
+namespace Werkverantwoording.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class changedtaskiDinsideofprogressfrominttolist : DbMigration
+    {
+        public override void Up()
+        {
+            DropColumn("dbo.Progresses", "TaskID");
+        }
+        
+        public override void Down()
+        {
+            AddColumn("dbo.Progresses", "TaskID", c => c.Int(nullable: false));
+        }
+    }
+}

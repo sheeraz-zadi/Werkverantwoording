@@ -8,8 +8,7 @@ namespace Werkverantwoording.Models
     public class Progress
     {
         public int ID { get; set; }
-        public int UserID { get; set; }
-        public int TaskID { get; set; }
-        public bool Completed { get; set; }
+        public int taskID { get; set; }
+        public int dayID { get; set; }
     }
 }
