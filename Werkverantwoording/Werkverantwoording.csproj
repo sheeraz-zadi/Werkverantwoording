@@ -198,6 +198,14 @@
     <Compile Include="Migrations\201506021309146_Changed ProgressID type.Designer.cs">
       <DependentUpon>201506021309146_Changed ProgressID type.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506080837141_Added.cs" />
+    <Compile Include="Migrations\201506080837141_Added.Designer.cs">
+      <DependentUpon>201506080837141_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506080859005_Changed DataType in User Model.cs" />
+    <Compile Include="Migrations\201506080859005_Changed DataType in User Model.Designer.cs">
+      <DependentUpon>201506080859005_Changed DataType in User Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -294,6 +302,7 @@
     <Content Include="Views\Progresses\Details.cshtml" />
     <Content Include="Views\Progresses\Edit.cshtml" />
     <Content Include="Views\Progresses\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -323,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506021309146_Changed ProgressID type.resx">
       <DependentUpon>201506021309146_Changed ProgressID type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506080837141_Added.resx">
+      <DependentUpon>201506080837141_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506080859005_Changed DataType in User Model.resx">
+      <DependentUpon>201506080859005_Changed DataType in User Model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

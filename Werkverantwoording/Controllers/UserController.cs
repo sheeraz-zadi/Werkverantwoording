@@ -4,7 +4,9 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Werkverantwoording.DAL;
 using Werkverantwoording.Models;
@@ -36,6 +38,62 @@ namespace Werkverantwoording.Controllers
             return View(user);
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(User u)
+        {
+            // this action is for handle post (login)
+            if (ModelState.IsValid) // this is check validity
+            {
+                using (TaskContext dc = new TaskContext())
+                {
+                    var v = dc.Users.Where(a => a.Email.Equals(u.Email) && a.Password.Equals(u.Password)).FirstOrDefault();
+                    if (v != null)
+                    {
+
+                        var identity = new ClaimsIdentity(new[] {
+                        new Claim(ClaimTypes.Name, "Ben"),
+                        new Claim(ClaimTypes.Email, "a@b.com")
+                        },
+                        "ApplicationCookie");
+
+                        var ctx = Request.GetOwinContext();
+                        var authManager = ctx.Authentication;
+                        authManager.SignIn(identity);
+
+                        return RedirectToAction("AfterLogin");
+                    }
+                }
+            }
+            return View();
+        }
+
+        public ActionResult AfterLogin()
+        {
+            if (Session["LoggedUserID"] != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
+
+        public ActionResult LogOut()
+        {
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+
+            authManager.SignOut("ApplicationCookie");
+            return RedirectToAction("index", "home");
+        }
+
         // GET: User/Create
         public ActionResult Create()
         {
@@ -47,7 +105,7 @@ namespace Werkverantwoording.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstName,LastName,Email,StartInternship,RoleID")] User user)
+        public ActionResult Create(User user)
         {
             if (ModelState.IsValid)
             {

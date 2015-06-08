@@ -11,6 +11,7 @@ using Werkverantwoording.Models;
 
 namespace Werkverantwoording.Controllers
 {
+    [Authorize]
     public class DayController : Controller
     {
         private TaskContext db = new TaskContext();
@@ -39,26 +40,35 @@ namespace Werkverantwoording.Controllers
         // GET: Progress/Create
         public ActionResult Create()
         {
-
-            var assignments = db.Assignment.ToList();
-            var assignmentsDesc = new List<string>();
-            var assignmentsID = new List<int>();
-
-            for (int i = 0; i < assignments.Count(); i++)
+            if (Session["LogedUserID"] != null)
             {
 
-                string assingnmentDesc = assignments[i].Description.ToString();
-                int assingnmentID = assignments[i].ID;
+                var assignments = db.Assignment.ToList();
+                var assignmentsDesc = new List<string>();
+                var assignmentsID = new List<int>();
 
-                assignmentsDesc.Add(assingnmentDesc);
-                assignmentsID.Add(assingnmentID);
+                for (int i = 0; i < assignments.Count(); i++)
+                {
+
+                    string assingnmentDesc = assignments[i].Description.ToString();
+                    int assingnmentID = assignments[i].ID;
+
+                    assignmentsDesc.Add(assingnmentDesc);
+                    assignmentsID.Add(assingnmentID);
+
+                }
+
+                ViewBag.assignmentsDesc = assignmentsDesc;
+                ViewBag.assignmentsID = assignmentsID;
+
+                return View();
 
             }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
 
-            ViewBag.assignmentsDesc = assignmentsDesc;
-            ViewBag.assignmentsID = assignmentsID;
-
-            return View();
         }
 
         // POST: Progress/Create
