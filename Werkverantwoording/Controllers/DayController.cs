@@ -40,9 +40,6 @@ namespace Werkverantwoording.Controllers
         // GET: Progress/Create
         public ActionResult Create()
         {
-            if (Session["LogedUserID"] != null)
-            {
-
                 var assignments = db.Assignment.ToList();
                 var assignmentsDesc = new List<string>();
                 var assignmentsID = new List<int>();
@@ -62,13 +59,6 @@ namespace Werkverantwoording.Controllers
                 ViewBag.assignmentsID = assignmentsID;
 
                 return View();
-
-            }
-            else
-            {
-                return RedirectToAction("Login", "User");
-            }
-
         }
 
         // POST: Progress/Create
