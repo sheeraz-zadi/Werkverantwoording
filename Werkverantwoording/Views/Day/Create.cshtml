@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Create";
-    int count = 0;
 }
 
 <h2>Create</h2>
@@ -16,13 +15,12 @@
         <h4>Progress</h4>
 
         <ul>
-            @foreach (var assignment in ViewBag.assignmentsDesc)
+            @foreach (var assignment in ViewBag.Assignments)
             {
                 <li>
-                    <input type="checkbox" name="SelectedAssignment" value="@ViewBag.assignmentsID[count]" />
-                    <label for="@assignment">@assignment</label>
+                    <input type="checkbox" name="SelectedAssignment" id="assignment_@assignment.ID" value="@assignment.ID" />
+                  <label for="assignment_@assignment.ID">@assignment.Description</label>
                 </li>
-                count++;
             }
         </ul>
 

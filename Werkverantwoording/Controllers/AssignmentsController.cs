@@ -18,7 +18,7 @@ namespace Werkverantwoording.Controllers
         // GET: Assignments
         public ActionResult Index()
         {
-            return View(db.Assignment.ToList());
+            return View(db.Assignments.ToList());
         }
 
         // GET: Assignments/Details/5
@@ -28,7 +28,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Assignment assignment = db.Assignment.Find(id);
+            Assignment assignment = db.Assignments.Find(id);
             if (assignment == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Werkverantwoording.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Assignment.Add(assignment);
+                db.Assignments.Add(assignment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Assignment assignment = db.Assignment.Find(id);
+            Assignment assignment = db.Assignments.Find(id);
             if (assignment == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Assignment assignment = db.Assignment.Find(id);
+            Assignment assignment = db.Assignments.Find(id);
             if (assignment == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Werkverantwoording.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Assignment assignment = db.Assignment.Find(id);
-            db.Assignment.Remove(assignment);
+            Assignment assignment = db.Assignments.Find(id);
+            db.Assignments.Remove(assignment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

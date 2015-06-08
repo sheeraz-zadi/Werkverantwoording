@@ -35,7 +35,7 @@ namespace Werkverantwoording.Migrations
                   new Assignment { Description = "Vrije dag"}
 
            };
-            assignments.ForEach(s => context.Assignment.AddOrUpdate(i => i.Description, s));            
+            assignments.ForEach(s => context.Assignments.AddOrUpdate(i => i.Description, s));            
             context.SaveChanges();          
             
          
