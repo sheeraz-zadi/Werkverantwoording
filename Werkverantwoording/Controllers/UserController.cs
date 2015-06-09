@@ -81,7 +81,7 @@ namespace Werkverantwoording.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Day");
             }
         }
 
