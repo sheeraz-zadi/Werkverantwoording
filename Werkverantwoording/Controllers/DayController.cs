@@ -19,7 +19,7 @@ namespace Werkverantwoording.Controllers
         // GET: Progress
         public ActionResult Index()
         {
-            return View(db.Day.ToList());
+            return View(db.Days.ToList());
         }
 
         // GET: Progress/Details/5
@@ -29,7 +29,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Day day = db.Day.Find(id);
+            Day day = db.Days.Find(id);
             if (day == null)
             {
                 return HttpNotFound();
@@ -40,25 +40,8 @@ namespace Werkverantwoording.Controllers
         // GET: Progress/Create
         public ActionResult Create()
         {
-                var assignments = db.Assignment.ToList();
-                var assignmentsDesc = new List<string>();
-                var assignmentsID = new List<int>();
-
-                for (int i = 0; i < assignments.Count(); i++)
-                {
-
-                    string assingnmentDesc = assignments[i].Description.ToString();
-                    int assingnmentID = assignments[i].ID;
-
-                    assignmentsDesc.Add(assingnmentDesc);
-                    assignmentsID.Add(assingnmentID);
-
-                }
-
-                ViewBag.assignmentsDesc = assignmentsDesc;
-                ViewBag.assignmentsID = assignmentsID;
-
-                return View();
+            ViewBag.Assignments = db.Assignments;
+            return View();
         }
 
         // POST: Progress/Create
@@ -72,7 +55,7 @@ namespace Werkverantwoording.Controllers
             {
                 //day.ProgressID = null;
                 day.Submitted = DateTime.Now;
-                db.Day.Add(day);
+                db.Days.Add(day);
                 db.SaveChanges();
 
                 foreach (int assignment in selectedAssignment)
@@ -80,7 +63,7 @@ namespace Werkverantwoording.Controllers
                     Progress progress = new Progress();
                     progress.taskID = assignment;
                     progress.dayID = day.ID;
-                    db.Progress.Add(progress);
+                    db.Progresses.Add(progress);
                 }
 
                 db.SaveChanges();
@@ -99,7 +82,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Day progress = db.Day.Find(id);
+            Day progress = db.Days.Find(id);
             if (progress == null)
             {
                 return HttpNotFound();
@@ -130,7 +113,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Day day = db.Day.Find(id);
+            Day day = db.Days.Find(id);
             if (day == null)
             {
                 return HttpNotFound();
@@ -143,8 +126,8 @@ namespace Werkverantwoording.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Day day = db.Day.Find(id);
-            db.Day.Remove(day);
+            Day day = db.Days.Find(id);
+            db.Days.Remove(day);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
