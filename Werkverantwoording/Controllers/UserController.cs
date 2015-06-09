@@ -20,6 +20,28 @@ namespace Werkverantwoording.Controllers
         // GET: User
         public ActionResult Index()
         {
+            var user = new User();
+            string userMail = User.Identity.Name;
+
+            User currentUser;
+            //1. Get student from DB
+            using (var ctx = new TaskContext())
+            {
+                currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
+            }
+
+
+
+            if (currentUser.Role.ToString() == "Student")
+            {
+                ViewBag.Student = "Hallo, student!";
+            }
+
+            if (currentUser.Role.ToString() == "Teacher")
+            {
+                ViewBag.Teacher = "Hallo, teacher!";
+            }
+
             return View(db.Users.ToList());
         }
 
@@ -57,8 +79,9 @@ namespace Werkverantwoording.Controllers
                     {
 
                         var identity = new ClaimsIdentity(new[] {
-                        new Claim(ClaimTypes.Name, "user"),
-                        new Claim(ClaimTypes.Email, u.Email)
+                        new Claim(ClaimTypes.Name, u.Email
+),
+                        new Claim(ClaimTypes.Email, "user")
                         },
                         "ApplicationCookie");
 
@@ -97,6 +120,7 @@ namespace Werkverantwoording.Controllers
         // GET: User/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -109,6 +133,7 @@ namespace Werkverantwoording.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -137,7 +162,7 @@ namespace Werkverantwoording.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,FirstName,LastName,Email,StartInternship,RoleID")] User user)
+        public ActionResult Edit(User user)
         {
             if (ModelState.IsValid)
             {
