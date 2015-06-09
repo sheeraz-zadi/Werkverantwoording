@@ -57,8 +57,8 @@ namespace Werkverantwoording.Controllers
                     {
 
                         var identity = new ClaimsIdentity(new[] {
-                        new Claim(ClaimTypes.Name, "Ben"),
-                        new Claim(ClaimTypes.Email, "a@b.com")
+                        new Claim(ClaimTypes.Name, "user"),
+                        new Claim(ClaimTypes.Email, u.Email)
                         },
                         "ApplicationCookie");
 

@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201506080859005_Changed DataType in User Model.Designer.cs">
       <DependentUpon>201506080859005_Changed DataType in User Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506091026058_current database.cs" />
+    <Compile Include="Migrations\201506091026058_current database.Designer.cs">
+      <DependentUpon>201506091026058_current database.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Assignment.cs" />
@@ -338,6 +342,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506080859005_Changed DataType in User Model.resx">
       <DependentUpon>201506080859005_Changed DataType in User Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506091026058_current database.resx">
+      <DependentUpon>201506091026058_current database.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
