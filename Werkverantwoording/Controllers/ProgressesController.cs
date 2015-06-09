@@ -18,7 +18,7 @@ namespace Werkverantwoording.Controllers
         // GET: Progresses
         public ActionResult Index()
         {
-            return View(db.Progress.ToList());
+            return View(db.Progresses.ToList());
         }
 
         // GET: Progresses/Details/5
@@ -28,7 +28,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Progress progress = db.Progress.Find(id);
+            Progress progress = db.Progresses.Find(id);
             if (progress == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Werkverantwoording.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Progress.Add(progress);
+                db.Progresses.Add(progress);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Progress progress = db.Progress.Find(id);
+            Progress progress = db.Progresses.Find(id);
             if (progress == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Werkverantwoording.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Progress progress = db.Progress.Find(id);
+            Progress progress = db.Progresses.Find(id);
             if (progress == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Werkverantwoording.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Progress progress = db.Progress.Find(id);
-            db.Progress.Remove(progress);
+            Progress progress = db.Progresses.Find(id);
+            db.Progresses.Remove(progress);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
