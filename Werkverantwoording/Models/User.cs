@@ -17,6 +17,12 @@ namespace Werkverantwoording.Models
         [Required(ErrorMessage = "Please provide password", AllowEmptyStrings = false)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public int RoleID { get; set; }
+        public Roles Role { get; set; }
+    }
+    public enum Roles
+    {
+        Teacher,
+        Student
     }
 }
+
