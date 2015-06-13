@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Werkverantwoording.DAL;
@@ -67,6 +68,26 @@ namespace Werkverantwoording.Controllers
                 }
 
                 db.SaveChanges();
+
+                //Send mail to teacher with assignments
+                string fromaddr = "dannybrouwertest@hotmail.com";
+                string toaddr = "dannybrouwer@msn.com"; 
+                string password = "Testmail1";
+
+
+                MailMessage msg = new MailMessage();
+                msg.Subject = "Onderwerp";
+                msg.From = new MailAddress(fromaddr);
+                msg.Body = "Body";
+                msg.To.Add(new MailAddress("dannybrouwer@msn.com"));
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.live.com";
+                smtp.Port = 25;
+                smtp.UseDefaultCredentials = false;
+                smtp.EnableSsl = true;
+                NetworkCredential nc = new NetworkCredential(fromaddr, password);
+                smtp.Credentials = nc;
+                smtp.Send(msg);
 
                 return RedirectToAction("Index");
             }
