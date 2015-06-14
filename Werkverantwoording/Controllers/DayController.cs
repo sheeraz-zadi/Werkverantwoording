@@ -53,8 +53,17 @@ namespace Werkverantwoording.Controllers
         {
             if (ModelState.IsValid)
             {
-                //day.ProgressID = null;
+                var user = new User();
+                string userMail = User.Identity.Name;
+                User currentUser;
+
+                using (var ctx = new TaskContext())
+                {
+                    currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
+                }
+
                 day.Submitted = DateTime.Now;
+                day.UserID = currentUser.ID;
                 db.Days.Add(day);
                 db.SaveChanges();
 
@@ -70,7 +79,6 @@ namespace Werkverantwoording.Controllers
 
                 return RedirectToAction("Index");
             }
-
 
             return View(day);
         }
