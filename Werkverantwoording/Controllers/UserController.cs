@@ -35,7 +35,7 @@ namespace Werkverantwoording.Controllers
 
             if (currentUser.Role.ToString() == "Teacher")
             {
-                return View(db.Users.ToList());
+                return View(db.Users.Where(s => s.Role.ToString() == "Student").ToList());
             }
             if (currentUser.Role.ToString() == "Student")
             {
