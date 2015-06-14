@@ -27,7 +27,7 @@ namespace Werkverantwoording.Controllers
             }
             if (currentUser.Role.ToString() == "Student")
             {
-                return RedirectToAction("Create", "Day");
+                return View();
             }
             }
 
