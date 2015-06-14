@@ -23,9 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.StartInternship)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Role)
-        </th>
+        <th></th>
         <th></th>
     </tr>
 
@@ -44,7 +42,8 @@
             @Html.DisplayFor(modelItem => item.StartInternship)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Role)
+            <a href="/Progresses/Index/@item.ID">See Progress</a>
+           
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
