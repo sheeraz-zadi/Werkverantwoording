@@ -30,8 +30,6 @@ namespace Werkverantwoording.Controllers
                 currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
             }
 
-
-
             if (currentUser.Role.ToString() == "Student")
             {
                 ViewBag.Student = "Hallo, student!";
@@ -104,7 +102,20 @@ namespace Werkverantwoording.Controllers
             }
             else
             {
-                return RedirectToAction("Create", "Day");
+                string userMail = User.Identity.Name;
+                User currentUser;
+
+                using (var ctx = new TaskContext())
+                {
+                    currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
+                }
+
+                if (currentUser.Role.ToString() == "Teacher")
+                {
+                    return RedirectToAction("Index", "User");
+                }
+
+                    return RedirectToAction("Create", "Day");
             }
         }
 
