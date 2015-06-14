@@ -16,9 +16,60 @@ namespace Werkverantwoording.Controllers
         private TaskContext db = new TaskContext();
 
         // GET: Progresses
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Progresses.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            string userMail = User.Identity.Name;
+
+            User currentUser;
+            using (var ctx = new TaskContext())
+            {
+                currentUser = ctx.Users.Where(s => s.ID == id).FirstOrDefault<User>();
+            }
+
+            List<int> dayIdList = new List<int>();
+            List<int> progressIdList = new List<int>();
+            List<string> dateOfProgress = new List<string>();
+
+            foreach (var day in db.Days)
+            {
+                if (id == day.UserID)
+                {
+                   dayIdList.Add(day.ID);
+                }
+            }
+
+            foreach (var progress in db.Progresses) {
+                for (int i = 0; i < dayIdList.Count; i++) {
+                    if (progress.dayID == dayIdList[i]) {
+                        progressIdList.Add(progress.ID);
+                    }
+                }
+            }
+            // Temporary changes to be able to show date
+            foreach (var day in db.Days)
+            {
+                for (int i = 0; i < progressIdList.Count; i++)
+                {
+                    if (day.ProgressID == progressIdList[i])
+                    {
+                        dateOfProgress.Add(day.Submitted.ToString());
+                    }
+                }
+            }
+            ViewBag.StudentName = currentUser.FirstName;
+            ViewBag.dateOfProgresses = dateOfProgress;
+
+            return View();
         }
 
         // GET: Progresses/Details/5
