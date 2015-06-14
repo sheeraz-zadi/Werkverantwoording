@@ -18,6 +18,7 @@ namespace Werkverantwoording.Controllers
         private TaskContext db = new TaskContext();
 
         // GET: User
+        [Authorize]
         public ActionResult Index()
         {
             var user = new User();
@@ -30,17 +31,18 @@ namespace Werkverantwoording.Controllers
                 currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
             }
 
-            if (currentUser.Role.ToString() == "Student")
-            {
-                ViewBag.Student = "Hallo, student!";
-            }
+            ViewBag.TeacherName = currentUser.FirstName;
 
             if (currentUser.Role.ToString() == "Teacher")
             {
-                ViewBag.Teacher = "Hallo, teacher!";
+                return View(db.Users.ToList());
+            }
+            if (currentUser.Role.ToString() == "Student")
+            {
+                return RedirectToAction("Create", "Day");
             }
 
-            return View(db.Users.ToList());
+            return RedirectToAction("Login");
         }
 
         // GET: User/Details/5
