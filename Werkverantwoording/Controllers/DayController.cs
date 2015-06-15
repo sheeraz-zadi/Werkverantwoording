@@ -54,8 +54,17 @@ namespace Werkverantwoording.Controllers
         {
             if (ModelState.IsValid)
             {
-                //day.ProgressID = null;
+                var user = new User();
+                string userMail = User.Identity.Name;
+                User currentUser;
+
+                using (var ctx = new TaskContext())
+                {
+                    currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
+                }
+
                 day.Submitted = DateTime.Now;
+                day.UserID = currentUser.ID;
                 db.Days.Add(day);
                 db.SaveChanges();
 
@@ -94,9 +103,10 @@ namespace Werkverantwoording.Controllers
                         messageBody += string.Format("<li>{0}</li>", description);
                 }
                 messageBody += "</ul>";
-                messageBody += "http://localhost:9096/Teacher/Confirmation";
+                messageBody += "http://localhost:9096/Teacher/Confirmation?userId="+currentUser.ID;
                 mail.IsBodyHtml = true;
                 mail.Body = messageBody;
+                
                 mail.To.Add("dannybrouwertest@mailinator.com");
 
                 client.Send(mail);
