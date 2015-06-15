@@ -94,6 +94,7 @@ namespace Werkverantwoording.Controllers
                         messageBody += string.Format("<li>{0}</li>", description);
                 }
                 messageBody += "</ul>";
+                messageBody += "http://localhost:9096/Teacher/Confirmation";
                 mail.IsBodyHtml = true;
                 mail.Body = messageBody;
                 mail.To.Add("dannybrouwertest@mailinator.com");
