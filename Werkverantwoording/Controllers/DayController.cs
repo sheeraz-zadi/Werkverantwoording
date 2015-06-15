@@ -70,24 +70,43 @@ namespace Werkverantwoording.Controllers
                 db.SaveChanges();
 
                 //Send mail to teacher with assignments
-                string fromaddr = "dannybrouwertest@hotmail.com";
-                string toaddr = "dannybrouwer@msn.com"; 
-                string password = "Testmail1";
+
+                //On localhost
+                MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "localhost";
+                NetworkCredential nc = new NetworkCredential("dannybrouwertest@hotmail.com", "Testmail1");
+                client.Credentials = nc;
+                mail.Subject = "Subject";
+                mail.Body = "Body";
+                mail.To.Add("dannybrouwertest@mailinator.com");
+
+                client.Send(mail);
+
+                //Anywhere else but localhost
+
+                //string fromaddr = "dannybrouwertest@hotmail.com";
+                //string toaddr = "dannybrouwer@msn.com"; 
+                //string password = "Testmail1";
 
 
-                MailMessage msg = new MailMessage();
-                msg.Subject = "Onderwerp";
-                msg.From = new MailAddress(fromaddr);
-                msg.Body = "Body";
-                msg.To.Add(new MailAddress("dannybrouwer@msn.com"));
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.live.com";
-                smtp.Port = 25;
-                smtp.UseDefaultCredentials = false;
-                smtp.EnableSsl = true;
-                NetworkCredential nc = new NetworkCredential(fromaddr, password);
-                smtp.Credentials = nc;
-                smtp.Send(msg);
+                //MailMessage msg = new MailMessage();
+                //msg.Subject = "Onderwerp";
+                //msg.From = new MailAddress(fromaddr);
+                //msg.Body = "Body";
+                //msg.To.Add(new MailAddress("dannybrouwer@msn.com"));
+                //SmtpClient smtp = new SmtpClient();
+                //smtp.Host = "localhost";
+                //smtp.Port = 25;
+                //smtp.UseDefaultCredentials = false;
+                //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //smtp.EnableSsl = true;
+                //NetworkCredential nc = new NetworkCredential(fromaddr, password);
+                //smtp.Credentials = nc;
+                //smtp.Send(msg);
 
                 return RedirectToAction("Index");
             }
