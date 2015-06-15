@@ -22,11 +22,11 @@ namespace Werkverantwoording.Controllers
         {
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Confirmation(Day day, int? id)
         {
-            
             var test = db.Days.Where(u => u.ID == id).FirstOrDefault();
             test.Completed = true;
             db.SaveChanges();
