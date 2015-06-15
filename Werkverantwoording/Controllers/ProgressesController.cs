@@ -30,11 +30,7 @@ namespace Werkverantwoording.Controllers
 
             string userMail = User.Identity.Name;
 
-            User currentUser;
-            using (var ctx = new TaskContext())
-            {
-                currentUser = ctx.Users.Where(s => s.ID == id).FirstOrDefault<User>();
-            }
+
 
             List<int> dayIdList = new List<int>();
             List<int> progressIdList = new List<int>();
@@ -49,26 +45,8 @@ namespace Werkverantwoording.Controllers
                 }
             }
 
-            //[Sheeraz]: Temporary put this as comment can be used later as we wil show the assignemts for selected day
-            //
-            //foreach (var progress in db.Progresses) {
-            //    for (int i = 0; i < dayIdList.Count; i++) {
-            //        if (progress.dayID == dayIdList[i]) {
-            //            progressIdList.Add(progress.ID);
-            //        }
-            //    }
-            //}
-            //foreach (var day in db.Days)
-            //{
-            //    for (int i = 0; i < progressIdList.Count; i++)
-            //    {
-            //        if (day.ProgressID == progressIdList[i])
-            //        {
-            //            dateOfProgress.Add(day.Submitted.ToString());
-            //        }
-            //    }
-            //}
-            ViewBag.StudentName = currentUser.FirstName;
+            ViewBag.StudentName = user.FirstName + " " + user.LastName;
+
             ViewBag.dateOfProgresses = dateOfProgress;
 
             return View();
