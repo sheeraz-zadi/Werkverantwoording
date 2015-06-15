@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Werkverantwoording.Models.Day
+@{
     ViewBag.Title = "Index";
 }
 
@@ -15,13 +16,13 @@
         <th></th>
     </tr>
 
-@foreach (var date in ViewBag.dateOfProgresses) {
+@foreach (var day in ViewBag.dateOfProgresses) {
     <tr>
         <td>
-            @date
-        </td>
+           <a href="/Progresses/Index/@day.ID"> @day.Submitted</a>
+        </td> 
         <td>
-           No
+          @day.Completed
         </td>
         <td>
         </td>

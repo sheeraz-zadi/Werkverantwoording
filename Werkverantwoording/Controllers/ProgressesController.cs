@@ -30,23 +30,21 @@ namespace Werkverantwoording.Controllers
 
             string userMail = User.Identity.Name;
 
-
-
             List<int> dayIdList = new List<int>();
             List<int> progressIdList = new List<int>();
-            List<string> dateOfProgress = new List<string>();
+            List<Day> dateOfProgress = new List<Day>();
 
             foreach (var day in db.Days)
             {
                 if (id == day.UserID)
                 {
-                   dayIdList.Add(day.ID);
-                   dateOfProgress.Add(day.Submitted.ToString());
+                   dateOfProgress.Add(day);
                 }
             }
 
-            ViewBag.StudentName = user.FirstName + " " + user.LastName;
 
+
+            ViewBag.StudentName = user.FirstName + " " + user.LastName;
             ViewBag.dateOfProgresses = dateOfProgress;
 
             return View();
