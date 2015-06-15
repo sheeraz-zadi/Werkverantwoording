@@ -68,6 +68,8 @@ namespace Werkverantwoording.Controllers
                 db.Days.Add(day);
                 db.SaveChanges();
 
+                var dayID = day.ID;
+
                 List<string> listOfAssignments = new List<string>();
 
                 foreach (int assignment in selectedAssignment)
@@ -80,8 +82,6 @@ namespace Werkverantwoording.Controllers
                     progress.dayID = day.ID;
                     db.Progresses.Add(progress);
                 }
-
-                
 
                 db.SaveChanges();
 
@@ -103,7 +103,7 @@ namespace Werkverantwoording.Controllers
                         messageBody += string.Format("<li>{0}</li>", description);
                 }
                 messageBody += "</ul>";
-                messageBody += "http://localhost:9096/Teacher/Confirmation?userId="+currentUser.ID;
+                messageBody += "http://localhost:9096/Teacher/Confirmation/"+dayID;
                 mail.IsBodyHtml = true;
                 mail.Body = messageBody;
                 
