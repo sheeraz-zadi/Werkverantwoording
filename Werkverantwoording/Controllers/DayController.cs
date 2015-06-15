@@ -59,13 +59,20 @@ namespace Werkverantwoording.Controllers
                 db.Days.Add(day);
                 db.SaveChanges();
 
+                List<string> listOfAssignments = new List<string>();
+
                 foreach (int assignment in selectedAssignment)
                 {
+                    var assignmentDesc = db.Assignments.Where(m => m.ID == assignment).FirstOrDefault().Description;
+                    listOfAssignments.Add(assignmentDesc);
+
                     Progress progress = new Progress();
                     progress.taskID = assignment;
                     progress.dayID = day.ID;
                     db.Progresses.Add(progress);
                 }
+
+                
 
                 db.SaveChanges();
 
@@ -81,7 +88,14 @@ namespace Werkverantwoording.Controllers
                 NetworkCredential nc = new NetworkCredential("dannybrouwertest@hotmail.com", "Testmail1");
                 client.Credentials = nc;
                 mail.Subject = "Subject";
-                mail.Body = "Body";
+                var messageBody = "<ul>";
+                foreach (string description in listOfAssignments)
+                {
+                        messageBody += string.Format("<li>{0}</li>", description);
+                }
+                messageBody += "</ul>";
+                mail.IsBodyHtml = true;
+                mail.Body = messageBody;
                 mail.To.Add("dannybrouwertest@mailinator.com");
 
                 client.Send(mail);
