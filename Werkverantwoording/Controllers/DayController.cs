@@ -133,11 +133,39 @@ namespace Werkverantwoording.Controllers
                 //smtp.Credentials = nc;
                 //smtp.Send(msg);
 
+
+
+
+                //Completed Assignments
+                var completed = new List<Progress>();
+                var assignmentId = new List<int>();
+                var listOfDescriptions = new List<string>();
+
+                using (var ctx = new TaskContext())
+                {
+                    completed = ctx.Progresses.Where(s => s.dayID == day.ID).ToList();
+
+                    foreach (var completedAssignment in completed)
+                    {
+                        assignmentId.Add(completedAssignment.taskID);
+                    }
+
+                    foreach (var assignmentDescription in assignmentId)
+                    {
+                        var assignment = ctx.Assignments.Where(s => s.ID == assignmentDescription).FirstOrDefault();
+                        listOfDescriptions.Add(assignment.Description);
+                    }
+                }          
+
+
+
                 return RedirectToAction("Index");
             }
 
             return View(day);
         }
+
+
 
         // GET: Progress/Edit/5
         public ActionResult Edit(int? id)
