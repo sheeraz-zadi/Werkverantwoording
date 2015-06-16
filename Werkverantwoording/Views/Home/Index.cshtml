@@ -6,3 +6,18 @@
 <div class="row">
     <p>Successfully saved the changes! come back tomorrow.</p>
 </div>
+
+<ul>
+    @if(ViewBag.CompletedAssignments != null)
+    {
+        foreach(var description in ViewBag.CompletedAssignments)
+        { 
+        <li>@description</li>
+        }
+    }
+    else
+    {
+        <li>Er zijn nog geen taken ingevuld vandaag.</li> 
+    }
+        
+</ul>

@@ -14,6 +14,12 @@ namespace Werkverantwoording.Controllers
         public ActionResult Index()
         {   
             User currentUser;
+
+            if (TempData["CompletedAssignments"] != null)
+            {
+                ViewBag.CompletedAssignments = TempData["CompletedAssignments"];
+            }
+
             using (var ctx = new TaskContext())
             {
                 currentUser = ctx.Users.Where(s => s.Email == User.Identity.Name).FirstOrDefault<User>();

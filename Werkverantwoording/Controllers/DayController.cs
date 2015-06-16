@@ -155,11 +155,10 @@ namespace Werkverantwoording.Controllers
                         var assignment = ctx.Assignments.Where(s => s.ID == assignmentDescription).FirstOrDefault();
                         listOfDescriptions.Add(assignment.Description);
                     }
-                }          
+                }
 
-
-
-                return RedirectToAction("Index");
+                TempData["CompletedAssignments"] = listOfDescriptions;
+                return RedirectToAction("Index", "Home");
             }
 
             return View(day);
