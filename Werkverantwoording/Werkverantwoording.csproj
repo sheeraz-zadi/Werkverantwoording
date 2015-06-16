@@ -164,6 +164,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
+    <Compile Include="Controllers\CompletedAssignmentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\DayController.cs" />
@@ -314,6 +315,7 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Teacher\Confirmation.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\CompletedAssignments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
