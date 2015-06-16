@@ -1,0 +1,18 @@
+﻿@model Werkverantwoording.Models.Day
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        
+    <div class="form-group">
+        <h2>Confirmation</h2>
+        <p>Did he really do what he/she said? Confirm it (or not)!</p>
+    </div>
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirm" class="btn btn-default" />
+    </div>
+}

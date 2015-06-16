@@ -169,6 +169,7 @@
     <Compile Include="Controllers\DayController.cs" />
     <Compile Include="Controllers\ProgressesController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAL\TaskContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -311,6 +312,8 @@
     <Content Include="Views\Progresses\Edit.cshtml" />
     <Content Include="Views\Progresses\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Teacher\Confirmation.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

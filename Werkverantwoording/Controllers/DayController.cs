@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Werkverantwoording.DAL;
@@ -67,8 +68,15 @@ namespace Werkverantwoording.Controllers
                 db.Days.Add(day);
                 db.SaveChanges();
 
+                var dayID = day.ID;
+
+                List<string> listOfAssignments = new List<string>();
+
                 foreach (int assignment in selectedAssignment)
                 {
+                    var assignmentDesc = db.Assignments.Where(m => m.ID == assignment).FirstOrDefault().Description;
+                    listOfAssignments.Add(assignmentDesc);
+
                     Progress progress = new Progress();
                     progress.taskID = assignment;
                     progress.dayID = day.ID;
@@ -77,7 +85,55 @@ namespace Werkverantwoording.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+                //Send mail to teacher with assignments
+
+                //On localhost
+                MailMessage mail = new MailMessage("dannybrouwertest@hotmail.com", "dannybrouwertest@mailinator.com");
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "localhost";
+                NetworkCredential nc = new NetworkCredential("dannybrouwertest@hotmail.com", "Testmail1");
+                client.Credentials = nc;
+                mail.Subject = "Subject";
+                var messageBody = "<ul>";
+                foreach (string description in listOfAssignments)
+                {
+                        messageBody += string.Format("<li>{0}</li>", description);
+                }
+                messageBody += "</ul>";
+                messageBody += "http://localhost:9096/Teacher/Confirmation/"+dayID;
+                mail.IsBodyHtml = true;
+                mail.Body = messageBody;
+                
+                mail.To.Add("dannybrouwertest@mailinator.com");
+
+                client.Send(mail);
+
+                //Anywhere else but localhost
+
+                //string fromaddr = "dannybrouwertest@hotmail.com";
+                //string toaddr = "dannybrouwer@msn.com"; 
+                //string password = "Testmail1";
+
+
+                //MailMessage msg = new MailMessage();
+                //msg.Subject = "Onderwerp";
+                //msg.From = new MailAddress(fromaddr);
+                //msg.Body = "Body";
+                //msg.To.Add(new MailAddress("dannybrouwer@msn.com"));
+                //SmtpClient smtp = new SmtpClient();
+                //smtp.Host = "localhost";
+                //smtp.Port = 25;
+                //smtp.UseDefaultCredentials = false;
+                //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                //smtp.EnableSsl = true;
+                //NetworkCredential nc = new NetworkCredential(fromaddr, password);
+                //smtp.Credentials = nc;
+                //smtp.Send(msg);
+
+                return RedirectToAction("Index");
             }
 
             return View(day);
