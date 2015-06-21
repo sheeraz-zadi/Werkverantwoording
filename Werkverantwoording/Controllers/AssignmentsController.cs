@@ -16,9 +16,32 @@ namespace Werkverantwoording.Controllers
         private TaskContext db = new TaskContext();
 
         // GET: Assignments
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            return View(db.Assignments.ToList());
+            ViewBag.DayDateTime = db.Days.Find(id).Submitted.ToString();
+            
+
+            List<int> taskIdList = new List<int>();
+            List<Assignment> assignmentDesc = new List<Assignment>();
+
+            foreach(var progress in db.Progresses){
+                if(id == progress.dayID){
+                    taskIdList.Add(progress.taskID);
+                }
+            }
+            foreach (var assignment in db.Assignments)
+            {
+                for (int i = 0; i < taskIdList.Count; i++) { 
+                    if (taskIdList[i] == assignment.ID)
+                    {
+                        assignmentDesc.Add(assignment);
+                    }
+                }
+            }
+
+            ViewBag.AssignmentsDesc = assignmentDesc;
+
+            return View();
         }
 
         // GET: Assignments/Details/5
