@@ -31,7 +31,7 @@ namespace Werkverantwoording.Controllers
                 currentUser = ctx.Users.Where(s => s.Email == userMail).FirstOrDefault<User>();
             }
 
-            ViewBag.TeacherName = currentUser.FirstName;
+            ViewBag.TeacherName = currentUser.FirstName + " " + currentUser.LastName;
 
             if (currentUser.Role.ToString() == "Teacher")
             {

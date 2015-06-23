@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Werkverantwoording.Models.Assignment>
+﻿@model  Werkverantwoording.Models.Assignment
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Assignments done on: @ViewBag.DayDateTime</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -17,15 +14,11 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var assignment in ViewBag.AssignmentsDesc)
+{
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @assignment.Description
         </td>
     </tr>
 }
